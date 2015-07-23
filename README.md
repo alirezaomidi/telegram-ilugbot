@@ -5,8 +5,8 @@ You should have python installed on a Linux/Mac machine. Then:
 
 ```bash
 $ git clone https://github.com/alirezaomidi/telegram-ilugbot
-$ cd telegram-ilubbot
-$ . script.sh
+$ cd telegram-ilugbot
+$ . setup.sh
 ```
 
 ### Running
