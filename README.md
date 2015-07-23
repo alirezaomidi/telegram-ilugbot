@@ -15,9 +15,9 @@ $ python bot.py
 ```
 
 ## TODO
+* Add exception handling!
 * Add documentation to each function in code.
 * Write documentation in readme.
 * Link to requirements' projects.
-* Add to `pip`.
 * Add some functionalities!
 * bot does not work without `last-update.id` file. It should create an new one with a **0** in it.
