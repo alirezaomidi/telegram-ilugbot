@@ -1,3 +1,4 @@
+import os
 import telegram
 from bs4 import BeautifulSoup as BS
 import requests as req
@@ -5,7 +6,7 @@ from time import sleep
 import re
 
 
-def get_sessions():
+def get_upcoming():
     """
     TODO Write Doc
     """
@@ -27,18 +28,22 @@ def get_sessions():
 
 
 if __name__ == '__main__':
+
     # assign bot and ilug url
     global bot, ilugurl
     bot = telegram.Bot(token=open('ilugbot.token').read())
     ilugurl = 'http://drupal.isfahanlug.org/'
 
+    # Assign Commands
     commands = [
         {
-            'match': r'^/sessions',
-            'func': get_sessions
+            'match': r'^/upcoming',
+            'func': get_upcoming,
         }
     ]
 
+    if not os.path.isfile('last-update.id'):  # Check if file dose not exists
+        open('last-update.id', 'w').write('0')
     last_update_id_file = open('last-update.id', 'r+')
     last_update_id = int(last_update_id_file.read())
 
