@@ -1,2 +1,3 @@
 *.token
 *.id
+.idea/*

@@ -1,13 +1,14 @@
 import telegram
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup as BS
 import requests as req
 from time import sleep
 import re
 
+
 def get_sessions():
-    '''
-    TODO write doc
-    '''
+    """
+    TODO Write Doc
+    """
 
     # get ilug page html
     r = req.get(ilugurl)
@@ -15,7 +16,7 @@ def get_sessions():
     if r.ok:
         # get groups' this week session
         r.encoding = 'utf-8'
-        source_code = bs(r.text, 'html.parser')
+        source_code = BS(r.text, 'html.parser')
         main_group = source_code.find(id='main-group')
         sub_groups = source_code.find(id='sub-groups')
 
