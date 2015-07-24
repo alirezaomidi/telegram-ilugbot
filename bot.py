@@ -31,9 +31,6 @@ def get_contact_info():
     """
     TODO Write Doc
     """
-    """
-    TODO Write Doc
-    """
 
     # get ilug page html
     r = req.get(ilugurl)
@@ -49,9 +46,6 @@ def get_contact_info():
 
 
 def get_news():
-    """
-    TODO Write Doc
-    """
     """
     TODO Write Doc
     """
