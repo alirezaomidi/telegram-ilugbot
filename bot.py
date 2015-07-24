@@ -1,6 +1,6 @@
 import os
 import telegram
-from bs4 import BeautifulSoup as BS
+from bs4 import BeautifulSoup
 import requests as req
 from time import sleep
 import re
@@ -17,13 +17,36 @@ def get_upcoming():
     if r.ok:
         # get groups' this week session
         r.encoding = 'utf-8'
-        source_code = BS(r.text, 'html.parser')
+        source_code = BeautifulSoup(r.text, 'html.parser')
         main_group = source_code.find(id='main-group')
         sub_groups = source_code.find(id='sub-groups')
 
         # print [main_group.get_text().encode('utf8'), sub_groups.get_text().encode('utf8')]
 
         return [main_group.get_text().encode('utf8'), sub_groups.get_text().encode('utf8')]
+    # TODO else
+
+
+def get_contact_info():
+    """
+    TODO Write Doc
+    """
+    """
+    TODO Write Doc
+    """
+
+    # get ilug page html
+    r = req.get(ilugurl)
+
+    if r.ok:
+        # get groups' this week session
+        r.encoding = 'utf-8'
+        source_code = BeautifulSoup(r.text, 'html.parser')
+        contact_info = source_code.find('div', 'channel')
+
+        # print [main_group.get_text().encode('utf8'), sub_groups.get_text().encode('utf8')]
+
+        return [contact_info.get_text().encode('utf8')]
     # TODO else
 
 
@@ -39,6 +62,10 @@ if __name__ == '__main__':
         {
             'match': r'^/upcoming',
             'func': get_upcoming,
+        },
+        {
+            'match': r'^/irc',
+            'func': get_contact_info,
         }
     ]
 
