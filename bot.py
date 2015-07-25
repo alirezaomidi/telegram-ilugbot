@@ -1,13 +1,15 @@
+import os
 import telegram
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 import requests as req
 from time import sleep
 import re
 
-def get_sessions():
-    '''
-    TODO write doc
-    '''
+
+def get_upcoming():
+    """
+    TODO Write Doc
+    """
 
     # get ilug page html
     r = req.get(ilugurl)
@@ -15,7 +17,7 @@ def get_sessions():
     if r.ok:
         # get groups' this week session
         r.encoding = 'utf-8'
-        source_code = bs(r.text, 'html.parser')
+        source_code = BeautifulSoup(r.text, 'html.parser')
         main_group = source_code.find(id='main-group')
         sub_groups = source_code.find(id='sub-groups')
 
@@ -25,19 +27,50 @@ def get_sessions():
     # TODO else
 
 
+def get_contact_info():
+    """
+    TODO Write Doc
+    """
+    """
+    TODO Write Doc
+    """
+
+    # get ilug page html
+    r = req.get(ilugurl)
+
+    if r.ok:
+        # get groups' this week session
+        r.encoding = 'utf-8'
+        source_code = BeautifulSoup(r.text, 'html.parser')
+        contact_info = source_code.find('div', 'channel')
+
+        # print [main_group.get_text().encode('utf8'), sub_groups.get_text().encode('utf8')]
+
+        return [contact_info.get_text().encode('utf8')]
+    # TODO else
+
+
 if __name__ == '__main__':
+
     # assign bot and ilug url
     global bot, ilugurl
     bot = telegram.Bot(token=open('ilugbot.token').read())
     ilugurl = 'http://drupal.isfahanlug.org/'
 
+    # Assign Commands
     commands = [
         {
-            'match': r'^/sessions',
-            'func': get_sessions
+            'match': r'^/upcoming',
+            'func': get_upcoming,
+        },
+        {
+            'match': r'^/irc',
+            'func': get_contact_info,
         }
     ]
 
+    if not os.path.isfile('last-update.id'):  # Check if file dose not exists
+        open('last-update.id', 'w').write('0')
     last_update_id_file = open('last-update.id', 'r+')
     last_update_id = int(last_update_id_file.read())
 
