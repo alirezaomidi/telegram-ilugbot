@@ -68,12 +68,19 @@ def get_news():
             # get groups' this week session
             r.encoding = 'utf-8'
             source_code = BeautifulSoup(r.text, 'html.parser')
-            last_ten_news = source_code.find_all('ul')[1].findAll('li')[-10:]
+            ul = source_code.find_all('ul')[1]
+            ul = re.sub(r'</i>\n(</li>)*</ul>', r'</i></ul>', ul.encode())
+            ul = ul.replace('<li>', '</li><li>')
+            ul = ul.replace('<ul>\n</li>', '<ul>')
+
+            source_code = BeautifulSoup(ul, 'html.parser')
+            last_ten_news = source_code.find_all('li')[-10:]
             last_ten_news.reverse()
 
             result = []
             for news in last_ten_news:
-                result.append((news.get_text() + '\n\n' + last_month_url + news.find('a')['href']).encode('utf-8'))
+                result.append((news.get_text() + '\n\n' + last_month_url.replace('date.html', '') + news.find('a')['href'] + '\n\n')
+                              .encode('utf-8'))
 
             return result
     # TODO else
