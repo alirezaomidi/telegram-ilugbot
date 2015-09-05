@@ -130,6 +130,6 @@ if __name__ == '__main__':
             for command in commands:
                 if re.search(command['match'], update.message.text):
                     for message in command['func']():
-                        bot.sendMessage(update.message.chat.id, message)
+                        bot.sendMessage(chat_id=update.message.chat.id, message)
                     break
             sleep(3)
