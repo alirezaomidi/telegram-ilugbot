@@ -1,5 +1,11 @@
 # Isfahan LUG Telegram Bot
 
+The official Telegram bot of Isfahan LUG. It is accessible at @ilugbot in Telegram Messenger.
+
+Powered by: [python-telegram-bot](https://github.com/leandrotoledo/python-telegram-bot)
+
+The presentation leading to develop this project is accessible [here](http://alirezaomidi.github.io/isfahanlug-telegrambot-presentation/#1).
+
 ### Installing
 You should have python installed on a Linux/Mac machine. Then:
 
@@ -14,10 +20,15 @@ $ . setup.sh
 $ python bot.py
 ```
 
-## TODO
-* Add exception handling!
+### Features
+* `/upcoming`: Get list of upcoming events in Isfahan LUG
+* `/news`: Get 10 latest news in the mailing list of Isfahan LUG
+* `/irc`: Get IRC channel information
+
+---
+
+### TODO
+* Add exception handling.
 * Add documentation to each function in code.
 * Write documentation in readme.
-* Link to requirements' projects.
-* Add some functionalities!
-* bot does not work without `last-update.id` file. It should create an new one with a **0** in it.
+* Add some functionalities! :D
